@@ -92,7 +92,7 @@ OCD = openocd \
 #######################################
 # macros for gcc
 AS_DEFS =
-C_DEFS = -D"__weak=__attribute__((weak))" -D"__packed=__attribute__((__packed__))" -D"USE_HAL_DRIVER" -D"STM32F103xB"
+C_DEFS = -D__weak="__attribute__((weak))" -D__packed="__attribute__((__packed__))" -D"USE_HAL_DRIVER" -D"STM32F103xB"
 # includes for gcc
 AS_INCLUDES =
 C_INCLUDES = -IDrivers/CMSIS/Device/ST/STM32F1xx/Include
