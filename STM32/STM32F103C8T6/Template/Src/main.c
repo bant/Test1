@@ -100,6 +100,8 @@ int main(void)
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
+    HAL_GPIO_TogglePin(ONBOARD_LED_GPIO_Port, ONBOARD_LED_Pin);
+    HAL_Delay(500);
 
   }
   /* USER CODE END 3 */
@@ -197,6 +199,8 @@ void _Error_Handler(char * file, int line)
   /* User can add his own implementation to report the HAL error return state */
   while(1) 
   {
+    HAL_GPIO_TogglePin(ONBOARD_LED_GPIO_Port, ONBOARD_LED_Pin);
+    HAL_Delay(25);
   }
   /* USER CODE END Error_Handler_Debug */ 
 }
