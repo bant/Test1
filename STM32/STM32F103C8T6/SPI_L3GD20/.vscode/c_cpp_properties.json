@@ -1,0 +1,58 @@
+{
+    "configurations": [
+        {
+            "name": "Mac",
+            "includePath": [
+                "/usr/include"
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": "",
+                "path": [
+                    "/usr/include",
+                    "${workspaceRoot}"
+                ]
+            },
+            "intelliSenseMode": "clang-x64"
+        },
+        {
+            "name": "Linux",
+            "includePath": [
+                "/usr/arm-none-eabi/include",
+                "/usr/lib/gcc/arm-none-eabi/6.2.1/include",
+                "/usr/lib/gcc/arm-none-eabi/6.2.1/include-fixed"
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": "",
+                "path": [
+                    "/usr/arm-none-eabi/include",
+                    "/usr/lib/gcc/arm-none-eabi/6.2.1/include",
+                    "/usr/lib/gcc/arm-none-eabi/6.2.1/include-fixed",
+                    "${workspaceRoot}"
+                ]
+            },
+            "intelliSenseMode": "clang-x64"
+        },
+        {
+            "name": "Win32",
+            "includePath": [
+                "C:/Program Files (x86)/GNU Tools ARM Embedded/5.4 2016q3/lib/gcc/arm-none-eabi/5.4.1/include",
+                "C:/Program Files (x86)/GNU Tools ARM Embedded/5.4 2016q3/lib/gcc/arm-none-eabi/5.4.1/include-fixed",
+                "C:/Program Files (x86)/GNU Tools ARM Embedded/5.4 2016q3/arm-none-eabi/include"
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": "",
+                "path": [
+                    "C:/Program Files (x86)/GNU Tools ARM Embedded/5.4 2016q3/lib/gcc/arm-none-eabi/5.4.1/include",
+                    "C:/Program Files (x86)/GNU Tools ARM Embedded/5.4 2016q3/lib/gcc/arm-none-eabi/5.4.1/include-fixed",
+                    "C:/Program Files (x86)/GNU Tools ARM Embedded/5.4 2016q3/arm-none-eabi/include",
+                    "${workspaceRoot}"
+                ]
+            },
+            "intelliSenseMode": "msvc-x64"
+        }
+    ],
+    "version": 2
+}
