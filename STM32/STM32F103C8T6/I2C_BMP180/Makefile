@@ -38,6 +38,7 @@ C_SOURCES = \
   Src/stm32f1xx_hal_msp.c \
   Src/main.c \
   Src/stm32f1xx_it.c \
+  Src/BMP180.c \
   Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c \
   Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c \
   Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c \

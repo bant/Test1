@@ -40,6 +40,7 @@
 #include "stm32f1xx_hal.h"
 
 /* USER CODE BEGIN Includes */
+#include "BMP180.h"
 
 /* USER CODE END Includes */
 
@@ -48,6 +49,8 @@ I2C_HandleTypeDef hi2c1;
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
+__IO float Temperature;
+__IO float Pressure;
 
 /* USER CODE END PV */
 
@@ -69,6 +72,8 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
+  int16_t tmpTemperature;
+  long tmpPressure;
 
   /* USER CODE END 1 */
 
@@ -93,6 +98,10 @@ int main(void)
   MX_I2C1_Init();
 
   /* USER CODE BEGIN 2 */
+  if (BMP180_Calibration(&hi2c1) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
   /* USER CODE END 2 */
 
@@ -103,6 +112,15 @@ int main(void)
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
+    BMP180_GetTemperature(&hi2c1, &tmpTemperature);
+    BMP180_GetPressure(&hi2c1, &tmpPressure);
+
+    Temperature = (float)tmpTemperature / 10.0f;
+    Pressure = (float)tmpPressure / 100.0f;
+
+    HAL_GPIO_TogglePin(ONBOARD_LED_GPIO_Port, ONBOARD_LED_Pin);
+
+    HAL_Delay(500);
 
   }
   /* USER CODE END 3 */
@@ -221,6 +239,8 @@ void _Error_Handler(char * file, int line)
   /* User can add his own implementation to report the HAL error return state */
   while(1) 
   {
+    HAL_GPIO_TogglePin(ONBOARD_LED_GPIO_Port, ONBOARD_LED_Pin);
+    HAL_Delay(25);
   }
   /* USER CODE END Error_Handler_Debug */ 
 }
