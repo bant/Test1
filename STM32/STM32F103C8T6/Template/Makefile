@@ -64,31 +64,19 @@ SZ = arm-none-eabi-size
 HEX = $(CP) -O ihex
 BIN = $(CP) -O binary -S
 GDB = arm-none-eabi-gdb
-#OCD = openocd \
-	-s /usr/local/share/openocd/scripts \
-	-f interface/stlink-v1.cfg \
-	-f target/stm32f100.cfg
-
+ifeq ($(OS),Windows_NT)
+# Windows 上で実行された
+OCD = openocd \
+	-s C:/tools/ocd/tcl \
+	-f interface/stlink-v2.cfg \
+	-f target/stm32f1x_flash.cfg
+else
 OCD = openocd \
 	-s /usr/local/share/openocd/scripts \
 	-f interface/stlink-v2.cfg \
 	-f target/stm32f1x_flash.cfg
+endif
 
-#OCD = openocd \
-	-s /usr/local/share/openocd/scripts \
-	-f interface/stlink-v2.cfg \
-	-f target/stm32f3discovery_flash.cfg
-
-#OCD = openocd \
-	-s /usr/local/share/openocd/scripts \
-	-f interface/stlink-v2.cfg \
-	-f target/stm32f4discovery_flash.cfg
-
-#OCD = openocd \
-	-s /usr/local/share/openocd/scripts \
-	-f interface/stlink-v2.cfg \
-	-f target/stm32f429discovery_flash.cfg
- 
 #######################################
 # CFLAGS
 #######################################
