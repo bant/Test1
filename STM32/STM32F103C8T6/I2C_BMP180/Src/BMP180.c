@@ -15,8 +15,8 @@
 //=============================================================================
 
 /* Includes ------------------------------------------------------------------*/
-#include <math.h>
 #include "BMP180.h"
+#include <math.h>
 
 /* local typedef -------------------------------------------------------------*/
 /* local define --------------------------------------------------------------*/
@@ -50,13 +50,15 @@ static HAL_StatusTypeDef BMP180_CalcB5(I2C_HandleTypeDef *hi2c, int16_t *b5)
     HAL_StatusTypeDef retVal;
 
     cmd = BMP180_READTEMPCMD;
-    retVal = HAL_I2C_Mem_Write(hi2c, BMP180_I2CADDR, BMP180_CONTROL, I2C_MEMADD_SIZE_8BIT, &cmd, 1, BMP180_TIMEOUT);
+    retVal = HAL_I2C_Mem_Write(hi2c, BMP180_I2CADDR, BMP180_CONTROL,
+                               I2C_MEMADD_SIZE_8BIT, &cmd, 1, BMP180_TIMEOUT);
     if (retVal != HAL_OK)
         return retVal;
 
     HAL_Delay(5); /* 5ms wait */
 
-    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_TEMPDATA, I2C_MEMADD_SIZE_8BIT, buf, 2, BMP180_TIMEOUT);
+    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_TEMPDATA,
+                              I2C_MEMADD_SIZE_8BIT, buf, 2, BMP180_TIMEOUT);
     if (retVal != HAL_OK)
         return retVal;
 
@@ -77,7 +79,8 @@ HAL_StatusTypeDef BMP180_Reset(I2C_HandleTypeDef *hi2c)
     uint8_t cmd;
 
     cmd = BMP180_RESETCMD;
-    return HAL_I2C_Mem_Write(hi2c, BMP180_I2CADDR, BMP180_RESET, I2C_MEMADD_SIZE_8BIT, &cmd, 1, BMP180_TIMEOUT);
+    return HAL_I2C_Mem_Write(hi2c, BMP180_I2CADDR, BMP180_RESET,
+                             I2C_MEMADD_SIZE_8BIT, &cmd, 1, BMP180_TIMEOUT);
 }
 
 /*======================================*/
@@ -88,7 +91,8 @@ HAL_StatusTypeDef BMP180_CheckId(I2C_HandleTypeDef *hi2c)
     HAL_StatusTypeDef retVal;
     uint8_t buf;
 
-    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_WHO_AM_I, I2C_MEMADD_SIZE_8BIT, &buf, 1, BMP180_TIMEOUT);
+    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_WHO_AM_I,
+                              I2C_MEMADD_SIZE_8BIT, &buf, 1, BMP180_TIMEOUT);
     if (retVal != HAL_OK)
         return retVal;
 
@@ -110,67 +114,78 @@ HAL_StatusTypeDef BMP180_Calibration(I2C_HandleTypeDef *hi2c)
     if (retVal != HAL_OK)
         return retVal;
 
-    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_CAL_AC1, I2C_MEMADD_SIZE_8BIT, buf, 2, BMP180_TIMEOUT);
+    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_CAL_AC1,
+                              I2C_MEMADD_SIZE_8BIT, buf, 2, BMP180_TIMEOUT);
     if (retVal != HAL_OK)
         return retVal;
     else
         ac1 = ((int16_t)buf[0] << 8) | buf[1];
 
-    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_CAL_AC2, I2C_MEMADD_SIZE_8BIT, buf, 2, BMP180_TIMEOUT);
+    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_CAL_AC2,
+                              I2C_MEMADD_SIZE_8BIT, buf, 2, BMP180_TIMEOUT);
     if (retVal != HAL_OK)
         return retVal;
     else
         ac2 = ((int16_t)buf[0] << 8) | buf[1];
 
-    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_CAL_AC3, I2C_MEMADD_SIZE_8BIT, buf, 2, BMP180_TIMEOUT);
+    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_CAL_AC3,
+                              I2C_MEMADD_SIZE_8BIT, buf, 2, BMP180_TIMEOUT);
     if (retVal != HAL_OK)
         return retVal;
     else
         ac3 = ((int16_t)buf[0] << 8) | buf[1];
 
-    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_CAL_AC4, I2C_MEMADD_SIZE_8BIT, buf, 2, BMP180_TIMEOUT);
+    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_CAL_AC4,
+                              I2C_MEMADD_SIZE_8BIT, buf, 2, BMP180_TIMEOUT);
     if (retVal != HAL_OK)
         return retVal;
     else
         ac4 = ((uint16_t)buf[0] << 8) | buf[1];
 
-    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_CAL_AC5, I2C_MEMADD_SIZE_8BIT, buf, 2, BMP180_TIMEOUT);
+    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_CAL_AC5,
+                              I2C_MEMADD_SIZE_8BIT, buf, 2, BMP180_TIMEOUT);
     if (retVal != HAL_OK)
         return retVal;
     else
         ac5 = ((uint16_t)buf[0] << 8) | buf[1];
 
-    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_CAL_AC6, I2C_MEMADD_SIZE_8BIT, buf, 2, BMP180_TIMEOUT);
+    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_CAL_AC6,
+                              I2C_MEMADD_SIZE_8BIT, buf, 2, BMP180_TIMEOUT);
     if (retVal != HAL_OK)
         return retVal;
     else
         ac6 = ((uint16_t)buf[0] << 8) | buf[1];
 
-    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_CAL_B1, I2C_MEMADD_SIZE_8BIT, buf, 2, BMP180_TIMEOUT);
+    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_CAL_B1,
+                              I2C_MEMADD_SIZE_8BIT, buf, 2, BMP180_TIMEOUT);
     if (retVal != HAL_OK)
         return retVal;
     else
         b1 = ((int16_t)buf[0] << 8) | buf[1];
 
-    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_CAL_B2, I2C_MEMADD_SIZE_8BIT, buf, 2, BMP180_TIMEOUT);
+    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_CAL_B2,
+                              I2C_MEMADD_SIZE_8BIT, buf, 2, BMP180_TIMEOUT);
     if (retVal != HAL_OK)
         return retVal;
     else
         b2 = ((int16_t)buf[0] << 8) | buf[1];
 
-    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_CAL_MB, I2C_MEMADD_SIZE_8BIT, buf, 2, BMP180_TIMEOUT);
+    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_CAL_MB,
+                              I2C_MEMADD_SIZE_8BIT, buf, 2, BMP180_TIMEOUT);
     if (retVal != HAL_OK)
         return retVal;
     else
         mb = ((int16_t)buf[0] << 8) | buf[1];
 
-    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_CAL_MC, I2C_MEMADD_SIZE_8BIT, buf, 2, BMP180_TIMEOUT);
+    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_CAL_MC,
+                              I2C_MEMADD_SIZE_8BIT, buf, 2, BMP180_TIMEOUT);
     if (retVal != HAL_OK)
         return retVal;
     else
         mc = ((int16_t)buf[0] << 8) | buf[1];
 
-    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_CAL_MD, I2C_MEMADD_SIZE_8BIT, buf, 2, BMP180_TIMEOUT);
+    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_CAL_MD,
+                              I2C_MEMADD_SIZE_8BIT, buf, 2, BMP180_TIMEOUT);
     if (retVal != HAL_OK)
         return retVal;
     else
@@ -180,7 +195,8 @@ HAL_StatusTypeDef BMP180_Calibration(I2C_HandleTypeDef *hi2c)
 }
 
 // Temperature returned will be in units of 0.1 deg C
-HAL_StatusTypeDef BMP180_GetTemperature(I2C_HandleTypeDef *hi2c, int16_t *pTemperature)
+HAL_StatusTypeDef BMP180_GetTemperature(I2C_HandleTypeDef *hi2c,
+                                        int16_t *pTemperature)
 {
     int16_t b5;
     HAL_StatusTypeDef retVal;
@@ -208,7 +224,8 @@ HAL_StatusTypeDef BMP180_GetPressure(I2C_HandleTypeDef *hi2c, long *pPressure)
     HAL_StatusTypeDef retVal;
 
     cmd = BMP180_READPRESSURECMD | (oss << 6);
-    retVal = HAL_I2C_Mem_Write(hi2c, BMP180_I2CADDR, BMP180_CONTROL, I2C_MEMADD_SIZE_8BIT, &cmd, 1, BMP180_TIMEOUT);
+    retVal = HAL_I2C_Mem_Write(hi2c, BMP180_I2CADDR, BMP180_CONTROL,
+                               I2C_MEMADD_SIZE_8BIT, &cmd, 1, BMP180_TIMEOUT);
     if (retVal != HAL_OK)
         return retVal;
 
@@ -221,7 +238,8 @@ HAL_StatusTypeDef BMP180_GetPressure(I2C_HandleTypeDef *hi2c, long *pPressure)
     else
         HAL_Delay(26);
 
-    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_PRESSUREDATA, I2C_MEMADD_SIZE_8BIT, buf, 3, BMP180_TIMEOUT);
+    retVal = HAL_I2C_Mem_Read(hi2c, BMP180_I2CADDR, BMP180_PRESSUREDATA,
+                              I2C_MEMADD_SIZE_8BIT, buf, 3, BMP180_TIMEOUT);
     if (retVal != HAL_OK)
         return retVal;
 
